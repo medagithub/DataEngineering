@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<log4j:configuration>
+
+    <!-- ============================== -->
+    <!-- Append messages to the console -->
+    <!-- ============================== -->
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+          <param name="ConversionPattern"
+                 value="%d{yyyy-MM-dd HH:mm:ss.SSS}{GMT+0} %L %t %C{1} %M %m %n"/>
+        </layout>
+    </appender>
+    
+<!--  
+    <appender name="RollingLogFile"
+              class="org.apache.log4j.rolling.RollingFileAppender">
+        
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="ActiveFileName" value="wordcount.log"/>
+            <param name="FileNamePattern"
+                   value="wordcount.log.%d.gz"/>
+        </rollingPolicy>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss.SSS}{GMT+0} %-5p %L %t %C{1} %M %m %n"/>
+        </layout>
+    </appender>
+    -->
+    
+   <appender name="MainLogFile"
+              class="org.apache.log4j.FileAppender">
+        <param name="File" value="codingchallenge.log"/>
+        <param name="Append" value="false"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss.SSS}{GMT+0} %L %t %C{1} %M %m %n"/>
+        </layout>
+    </appender>
+    
+    
+  <appender name="WordCountAppender"
+              class="org.apache.log4j.FileAppender">
+        <param name="File" value="wordcount.log"/>
+        <param name="Append" value="false"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss.SSS}{GMT+0} %L %t %C{1} %M %m %n"/>
+        </layout>
+    </appender>
+    
+    
+    <appender name="RunningMedianAppender"
+              class="org.apache.log4j.FileAppender">
+        <param name="File" value="runningmedian.log"/>
+        <param name="Append" value="false"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss.SSS}{GMT+0} %L %t %C{1} %M %m %n"/>
+        </layout>
+    </appender>
+    
+   <logger name="com.insightdataeng.WordCount">
+  <level value="DEBUG"/>
+  <appender-ref ref="WordCountAppender"/>
+ </logger>
+ 
+   <logger name="com.insightdataeng.RunningMedian">
+  <level value="DEBUG"/>
+  <appender-ref ref="RunningMedianAppender"/>
+ </logger>
+
+  <root> 
+    <priority value ="debug" /> 
+    <appender-ref ref="MainLogFile" /> 
+  </root>
+  
+</log4j:configuration>
